@@ -15,10 +15,11 @@ function preload() {
 function setup() {
   createCanvas(img.width, img.height);
   let segmentWidth = img.width / numSegments;
-  let segmentHeight = img.height / numSegments;
+  let segmentHeight = img.height / numSegments;	
 
-  segments = make2Darray(numSegments, numSegments); // Initialize the 2D array
-  
+
+  segments = make2Darray(numSegments, numSegments);
+
   for (let y = 0; y < numSegments; y++) {
     for (let x = 0; x < numSegments; x++) {
       let segXPos = x * segmentWidth;
@@ -27,34 +28,36 @@ function setup() {
       segments[y][x] = new ImageSegment(segXPos, segYPos, segmentWidth, segmentHeight, segmentColour);
     }
   }
-  for(let i = 0; i < nParticles; i++){
+  
+  for (let i = 0; i < nParticles; i++) {
     particles[i] = new Particle();
   }
 }
 
 function draw() {
   background(0);
+  
+  // Render the 3D block effect
   for (let y = 0; y < segments.length; y++) {
     for (let x = 0; x < segments[y].length; x++) {
       segments[y][x].draw();
     }
   }
 
-  
-	strokeWeight(attractors.length * 2);	
-  for(let i = 0; i < particles.length; i++){
+  // Update and display particles
+  strokeWeight(attractors.length * 5);
+  for (let i = 0; i < particles.length; i++) {
     particles[i].update();
     particles[i].show();
   }
-	
-  for(let i = 0; i < attractors.length; i++){
-		attractors[i].lifeTime --;
-		if(attractors[i].lifeTime <= 0){
-			attractors.splice(i, 1);
-		}
-    
-  }
 
+  // Update attractors' lifetime
+  for (let i = 0; i < attractors.length; i++) {
+    attractors[i].lifeTime--;
+    if (attractors[i].lifeTime <= 0) {
+      attractors.splice(i, 1);
+    }
+  }
 }
 
 function make2Darray(cols, rows) {
@@ -63,12 +66,12 @@ function make2Darray(cols, rows) {
     arr[i] = new Array(rows);
   }
   return arr;
-
 }
 
-function mousePressed(){
+function mousePressed() {
   attractors.push(new Attractor(mouseX, mouseY));
 }
+
 
 class ImageSegment {
   constructor(srcImgSegXPosInPrm, srcImgSegYPosInPrm, srcImgSegWidthInPrm, srcImgSegHeightInPrm, srcImgSegColourInPrm) {
@@ -107,35 +110,7 @@ class ImageSegment {
     // Lego bump
     fill(220);
     ellipse(this.srcImgSegXPos + this.srcImgSegWidth * 0.5, this.srcImgSegYPos + this.srcImgSegHeight * 0.5-2, bumpDiameter, bumpDiameter);
-
   }
 }
-
-
-
-
-
-function setup() {
-	createCanvas(windowWidth, windowHeight);
-	
-	if(width > height){
-		img.resize(0, height);
-	}else{
-		img.resize(width, 0);
-	}
-	
-	resizeCanvas(img.width, img.height);
-	
-	background(0);
-	
-
-}
-
-function draw() {
-	
-}
-
-
-
 
 
