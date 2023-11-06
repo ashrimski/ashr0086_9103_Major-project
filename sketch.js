@@ -39,10 +39,36 @@ function draw() {
       segments[y][x].draw();
     }
   }
-  // console.log(segments)
-  // console.log(segments[1][2])
+
+  
+	strokeWeight(attractors.length * 2);	
+  for(let i = 0; i < particles.length; i++){
+    particles[i].update();
+    particles[i].show();
+  }
+	
+  for(let i = 0; i < attractors.length; i++){
+		attractors[i].lifeTime --;
+		if(attractors[i].lifeTime <= 0){
+			attractors.splice(i, 1);
+		}
+    
+  }
+
 }
 
+function make2Darray(cols, rows) {
+  var arr = new Array(cols);
+  for (var i = 0; i < arr.length; i++) {
+    arr[i] = new Array(rows);
+  }
+  return arr;
+
+}
+
+function mousePressed(){
+  attractors.push(new Attractor(mouseX, mouseY));
+}
 
 class ImageSegment {
   constructor(srcImgSegXPosInPrm, srcImgSegYPosInPrm, srcImgSegWidthInPrm, srcImgSegHeightInPrm, srcImgSegColourInPrm) {
@@ -85,14 +111,7 @@ class ImageSegment {
   }
 }
 
-function make2Darray(cols, rows) {
-  var arr = new Array(cols);
-  for (var i = 0; i < arr.length; i++) {
-    arr[i] = new Array(rows);
-  }
-  return arr;
 
-}
 
 
 
@@ -114,25 +133,9 @@ function setup() {
 
 function draw() {
 	
-	strokeWeight(attractors.length * 2);
-	
-  for(let i = 0; i < particles.length; i++){
-    particles[i].update();
-    particles[i].show();
-  }
-	
-  for(let i = 0; i < attractors.length; i++){
-		attractors[i].lifeTime --;
-		if(attractors[i].lifeTime <= 0){
-			attractors.splice(i, 1);
-		}
-    
-  }
 }
 
-function mousePressed(){
-    attractors.push(new Attractor(mouseX, mouseY));
-}
+
 
 
 
