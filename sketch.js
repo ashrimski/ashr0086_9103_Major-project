@@ -4,6 +4,10 @@ let img;
 let numSegments = 80;
 let segments;
 
+let particles = [];
+let attractors = [];
+let nParticles = 1000;
+
 function preload() {
   img = loadImage('assets/Edvard_Munch_The_Scream.jpg');
 }
@@ -87,16 +91,7 @@ function make2Darray(cols, rows) {
 
 }
 
-let particles = [];
-let attractors = [];
-let nParticles = 1000;
-let img;
 
-
-
-function preload(){
-	img = loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1920px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg");
-}
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
