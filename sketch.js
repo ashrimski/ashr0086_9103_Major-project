@@ -27,6 +27,9 @@ function setup() {
       segments[y][x] = new ImageSegment(segXPos, segYPos, segmentWidth, segmentHeight, segmentColour);
     }
   }
+  for(let i = 0; i < nParticles; i++){
+    particles[i] = new Particle();
+  }
 }
 
 function draw() {
@@ -36,8 +39,8 @@ function draw() {
       segments[y][x].draw();
     }
   }
-  console.log(segments)
-  console.log(segments[1][2])
+  // console.log(segments)
+  // console.log(segments[1][2])
 }
 
 
@@ -106,9 +109,7 @@ function setup() {
 	
 	background(0);
 	
-	for(let i = 0; i < nParticles; i++){
-    particles[i] = new Particle();
-  }
+
 }
 
 function draw() {
